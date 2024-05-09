@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+logs
+.vscode
+.python-version
+.report.json
+test_logs

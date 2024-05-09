@@ -1,0 +1,87 @@
+services:
+  rippled:
+    hostname: rippled
+    image: legleux/rippled:2.2.0-b3
+    build:
+      dockerfile: Dockerfile.rippled
+    container_name: rippled
+    volumes:
+        - ./configs/rippled/:/etc/opt/ripple
+
+    command: ["/opt/ripple/bin/rippled", "--conf", "/etc/opt/ripple/rippled.cfg"]
+    networks:
+     rippled-net:
+
+  # explorer:
+  #   image: explorer
+  #   build:
+  #     dockerfile: Dockerfile.explorer
+  #   container_name: explorer
+  #   networks:
+  #       rippled-net:
+  # RIPPLED_VERSION="${VERSION}"
+  # RIPPLED_IMAGE="${IMAGE}"
+  val0:
+    hostname: validator_0
+    image: legleux/rippled:2.2.0-b3
+    container_name: val0
+    volumes:
+        - ./configs/node0:/etc/opt/ripple/
+    command: ["/opt/ripple/bin/rippled", "--start", "--conf", "/etc/opt/ripple/rippled.cfg"]
+    networks:
+     rippled-net:
+
+  val1:
+    hostname: validator_1
+    image: legleux/rippled:2.2.0-b3
+    container_name: val1
+    volumes:
+        - ./configs/node1:/etc/opt/ripple
+        # - val1:/var/rippled
+    command: ["/opt/ripple/bin/rippled", "--conf", "/etc/opt/ripple/rippled.cfg"]
+    networks:
+     rippled-net:
+
+  val2:
+    hostname: validator_2
+    image: legleux/rippled:2.2.0-b3
+    container_name: val2
+    volumes:
+        - ./configs/node2:/etc/opt/ripple
+        # - val2:/var/rippled
+    command: ["/opt/ripple/bin/rippled", "--conf", "/etc/opt/ripple/rippled.cfg"]
+    networks:
+     rippled-net:
+
+  val3:
+    hostname: validator_3
+    image: legleux/rippled:2.2.0-b3
+    container_name: val3
+    volumes:
+        - ./configs/node3:/etc/opt/ripple
+        # - val3:/var/rippled
+    command: ["/opt/ripple/bin/rippled", "--conf", "/etc/opt/ripple/rippled.cfg"]
+    networks:
+     rippled-net:
+
+  # proxy:
+  #   hostname: proxy
+  #   image: proxy
+  #   build:
+  #     dockerfile: Dockerfile.proxy
+  #   container_name: proxy
+  #   network_mode: "host"
+  #   # ***********ethis is *********<rippled_ip>  <explorer_ip>
+  #   command: ["node", "proxy.js", "172.20.0.7", "172.20.0.6"]
+    # this container should wait until the explorer is responding
+    # run docker network inspect and get the ips of the rippled and explorer instances
+    # then call the command here node proxy <rippled_ip> <explorer_ip>
+    # since we won't know beforehand which IP docker will give the containers and
+    # since the proxy is on the host network, we can't refer to the containers by docker DNS name
+    # docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' rippled
+    # docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' explorer
+
+networks:
+
+  rippled-net:
+    name: rippled-net
