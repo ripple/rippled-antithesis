@@ -1,9 +1,7 @@
 services:
   rippled:
     hostname: rippled
-    image: legleux/rippled:2.2.0-b3
-    build:
-      dockerfile: Dockerfile.rippled
+    image: rippled:antithesis
     container_name: rippled
     volumes:
         - ./configs/rippled/:/etc/opt/ripple
@@ -23,7 +21,7 @@ services:
   # RIPPLED_IMAGE="${IMAGE}"
   val0:
     hostname: validator_0
-    image: legleux/rippled:2.2.0-b3
+    image: rippled:antithesis
     container_name: val0
     volumes:
         - ./configs/node0:/etc/opt/ripple/
@@ -33,7 +31,7 @@ services:
 
   val1:
     hostname: validator_1
-    image: legleux/rippled:2.2.0-b3
+    image: rippled:antithesis
     container_name: val1
     volumes:
         - ./configs/node1:/etc/opt/ripple
@@ -44,7 +42,7 @@ services:
 
   val2:
     hostname: validator_2
-    image: legleux/rippled:2.2.0-b3
+    image: rippled:antithesis
     container_name: val2
     volumes:
         - ./configs/node2:/etc/opt/ripple
@@ -55,7 +53,7 @@ services:
 
   val3:
     hostname: validator_3
-    image: legleux/rippled:2.2.0-b3
+    image: rippled:antithesis
     container_name: val3
     volumes:
         - ./configs/node3:/etc/opt/ripple
