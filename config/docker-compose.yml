@@ -4,7 +4,7 @@ services:
     image: rippled:antithesis
     container_name: rippled
     volumes:
-        - ./configs/rippled/:/etc/opt/ripple
+        - ./volumes/rippled/:/etc/opt/ripple
     command: ["/opt/ripple/bin/rippled", "--conf", "/etc/opt/ripple/rippled.cfg"]
     networks:
      rippled-net:
@@ -14,7 +14,7 @@ services:
     image: rippled:antithesis
     container_name: val0
     volumes:
-        - ./configs/node0:/etc/opt/ripple/
+        - ./volumes/node0:/etc/opt/ripple/
     command: ["/opt/ripple/bin/rippled", "--start", "--conf", "/etc/opt/ripple/rippled.cfg"]
     networks:
      rippled-net:
@@ -24,7 +24,7 @@ services:
     image: rippled:antithesis
     container_name: val1
     volumes:
-        - ./configs/node1:/etc/opt/ripple
+        - ./volumes/node1:/etc/opt/ripple
     command: ["/opt/ripple/bin/rippled", "--conf", "/etc/opt/ripple/rippled.cfg"]
     networks:
      rippled-net:
@@ -34,7 +34,7 @@ services:
     image: rippled:antithesis
     container_name: val2
     volumes:
-        - ./configs/node2:/etc/opt/ripple
+        - ./volumes/node2:/etc/opt/ripple
     command: ["/opt/ripple/bin/rippled", "--conf", "/etc/opt/ripple/rippled.cfg"]
     networks:
      rippled-net:
@@ -44,7 +44,7 @@ services:
     image: rippled:antithesis
     container_name: val3
     volumes:
-        - ./configs/node3:/etc/opt/ripple
+        - ./volumes/node3:/etc/opt/ripple
     command: ["/opt/ripple/bin/rippled", "--conf", "/etc/opt/ripple/rippled.cfg"]
     networks:
      rippled-net:
@@ -54,7 +54,7 @@ services:
     image: rippled:antithesis
     container_name: val4
     volumes:
-        - ./configs/node4:/etc/opt/ripple
+        - ./volumes/node4:/etc/opt/ripple
     command: ["/opt/ripple/bin/rippled", "--conf", "/etc/opt/ripple/rippled.cfg"]
     networks:
      rippled-net:
@@ -64,7 +64,7 @@ services:
     image: rippled:antithesis
     container_name: val5
     volumes:
-        - ./configs/node5:/etc/opt/ripple
+        - ./volumes/node5:/etc/opt/ripple
     command: ["/opt/ripple/bin/rippled", "--conf", "/etc/opt/ripple/rippled.cfg"]
     networks:
      rippled-net:
