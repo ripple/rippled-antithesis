@@ -1,0 +1,6 @@
+pytest
+requests
+pytest-json-report
+pytest-rerunfailures
+websockets
+websocket

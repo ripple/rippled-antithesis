@@ -1,0 +1,9 @@
+FROM debian:bookworm-slim
+
+COPY workload/requirement.txt /root/requirement.txt
+WORKDIR /root
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && \
+    apt-get install --yes python3-pip python-is-python3 && \
+    apt-get clean && \
+    pip install --no-cache --break-system-packages -r /root/requirement.txt

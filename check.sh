@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-address=$(docker network inspect rippled-net | jq -r .[0].IPAM.Config[0].Gateway)
+address=$(docker network inspect config_antithesis-net | jq -r '.[0].IPAM.Config[0].Subnet')
 address=$(echo "${address%${address##*.}}")
 curl ${address}{2,3,4,5,6,7,8}:5005 \
     --silent \

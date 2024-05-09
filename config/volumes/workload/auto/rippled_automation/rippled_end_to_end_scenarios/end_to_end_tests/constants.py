@@ -3,8 +3,8 @@ MASTER_ACCOUNT_SEED = "snoPBrXtMeMyMHUVTgbuqAfg1SUTb"
 # This is a "test genesis account" used as the source funding account for all tests
 # This "test genesis account" is funded with 1 billion XRP from account:
 # "rPT1Sjq2YGrBMTttX4GZHjKu9dyfzbpAYe"/"sn6Unf8nSvQZvJsv2RBx3mARbJMAv"
-TEST_GENESIS_ACCOUNT_ID = "rh1HPuRVsYYvThxG2Bs1MfjmrVC73S16Fb"
-TEST_GENESIS_ACCOUNT_SEED = "snRzwEoNTReyuvz6Fb1CDXcaJUQdp"
+TEST_GENESIS_ACCOUNT_ID = "rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh"
+TEST_GENESIS_ACCOUNT_SEED = "snoPBrXtMeMyMHUVTgbuqAfg1SUTb"
 RUNTIME_FUNDING_ACCOUNT_MAX_BALANCE = "100000000000"  # 100K XRP
 DEVNET_NETWORK = "devnet"
 AUTOMATION_TMP_DIR = "/tmp/automation_work_dir"
@@ -65,8 +65,8 @@ SIDECHAIN_NETWORK_CONFIG = {
     DEVNET_NETWORK: "configs/rippled/sidechain/{}/config.json".format(DEVNET_NETWORK)
 }
 # master account to fund test accounts on issuing chain
-ISSUING_CHAIN_MASTER_ACCOUNT_ID = "rh1HPuRVsYYvThxG2Bs1MfjmrVC73S16Fb"
-ISSUING_CHAIN_MASTER_ACCOUNT_MASTER_SEED = "snRzwEoNTReyuvz6Fb1CDXcaJUQdp"
+ISSUING_CHAIN_MASTER_ACCOUNT_ID = "rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh"
+ISSUING_CHAIN_MASTER_ACCOUNT_MASTER_SEED = "snoPBrXtMeMyMHUVTgbuqAfg1SUTb"
 # INFO: LockingChainIssue.issuer "rnH6LV9V5Gv2xPNvXSmNNXWtRrf5rXunVV" in IOU witness config files
 LOCKING_CHAIN_IOU_ISSUER_SEED = "sniYJ8tygdMR9UDYqrgDcHQEpRowJ"  # for LockingChainIssue.issuer
 MAX_NO_OF_ACCOUNTS_FOR_A_TEST_RUN = 500  # to fund master accounts to source all accounts in the test run

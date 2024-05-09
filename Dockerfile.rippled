@@ -9,7 +9,7 @@ RUN apt-get update && \
     apt-get install --yes \
     clang-16 clang++-16 python3-pip python-is-python3 cmake git wget && \
     apt-get clean && \
-    pip install --no-cache --break-system-packages "conan<2" cmake
+    pip install --no-cache --break-system-packages "conan<2"
 
 RUN conan config set general.revisions_enabled=1 && \
     conan profile new --detect default && \
