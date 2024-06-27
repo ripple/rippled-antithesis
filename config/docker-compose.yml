@@ -5,7 +5,7 @@ services:
     container_name: workload
     volumes:
         - ./volumes/workload/:/root
-    command: ["/usr/bin/bash", "-c", "/root/run_tests.sh"]
+    command: ["/usr/bin/bash", "-c", "/root/run_tests.sh validator_0 validator_1 validator_2 validator_3 validator_4 validator_5"]
     working_dir: /root
     networks:
      rippled-net:
