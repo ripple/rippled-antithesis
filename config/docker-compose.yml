@@ -1,7 +1,7 @@
 services:
   workload:
     hostname: workload
-    image: workload:antithesis
+    image: workload:latest
     container_name: workload
     volumes:
         - ./volumes/workload/:/root
@@ -13,7 +13,7 @@ services:
 
   rippled:
     hostname: rippled
-    image: rippled:antithesis
+    image: rippled:latest
     container_name: rippled
     volumes:
         - ./volumes/rippled/:/etc/opt/ripple
@@ -24,7 +24,7 @@ services:
 
   val0:
     hostname: validator_0
-    image: rippled:antithesis
+    image: rippled:latest
     container_name: val0
     volumes:
         - ./volumes/node0:/etc/opt/ripple/
@@ -35,7 +35,7 @@ services:
 
   val1:
     hostname: validator_1
-    image: rippled:antithesis
+    image: rippled:latest
     container_name: val1
     volumes:
         - ./volumes/node1:/etc/opt/ripple
@@ -46,7 +46,7 @@ services:
 
   val2:
     hostname: validator_2
-    image: rippled:antithesis
+    image: rippled:latest
     container_name: val2
     volumes:
         - ./volumes/node2:/etc/opt/ripple
@@ -57,7 +57,7 @@ services:
 
   val3:
     hostname: validator_3
-    image: rippled:antithesis
+    image: rippled:latest
     container_name: val3
     volumes:
         - ./volumes/node3:/etc/opt/ripple
@@ -68,7 +68,7 @@ services:
 
   val4:
     hostname: validator_4
-    image: rippled:antithesis
+    image: rippled:latest
     container_name: val4
     volumes:
         - ./volumes/node4:/etc/opt/ripple
@@ -79,7 +79,7 @@ services:
 
   val5:
     hostname: validator_5
-    image: rippled:antithesis
+    image: rippled:latest
     container_name: val5
     volumes:
         - ./volumes/node5:/etc/opt/ripple
