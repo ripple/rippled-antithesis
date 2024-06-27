@@ -5,11 +5,11 @@ services:
     container_name: workload
     volumes:
         - ./volumes/workload/:/root
-    command: ["/usr/bin/bash", "-c", "/root/run_tests.sh validator_0 validator_1 validator_2 validator_3 validator_4 validator_5"]
+    command: ["/usr/bin/bash", "-c", "/root/run_tests.sh val0 val1 val2 val3 val4 val5"]
     working_dir: /root
     networks:
      rippled-net:
-      ipv4_address: 169.254.20.2
+      ipv4_address: 10.0.0.2
 
   rippled:
     hostname: rippled
@@ -20,10 +20,10 @@ services:
     command: ["/opt/ripple/bin/rippled", "--conf", "/etc/opt/ripple/rippled.cfg"]
     networks:
      rippled-net:
-      ipv4_address: 169.254.20.3
+      ipv4_address: 10.0.0.3
 
   val0:
-    hostname: validator_0
+    hostname: val0
     image: rippled:latest
     container_name: val0
     volumes:
@@ -31,10 +31,10 @@ services:
     command: ["/opt/ripple/bin/rippled", "--start", "--conf", "/etc/opt/ripple/rippled.cfg"]
     networks:
      rippled-net:
-      ipv4_address: 169.254.20.4
+      ipv4_address: 10.0.0.4
 
   val1:
-    hostname: validator_1
+    hostname: val1
     image: rippled:latest
     container_name: val1
     volumes:
@@ -42,10 +42,10 @@ services:
     command: ["/opt/ripple/bin/rippled", "--conf", "/etc/opt/ripple/rippled.cfg"]
     networks:
      rippled-net:
-      ipv4_address: 169.254.20.5
+      ipv4_address: 10.0.0.5
 
   val2:
-    hostname: validator_2
+    hostname: val2
     image: rippled:latest
     container_name: val2
     volumes:
@@ -53,10 +53,10 @@ services:
     command: ["/opt/ripple/bin/rippled", "--conf", "/etc/opt/ripple/rippled.cfg"]
     networks:
      rippled-net:
-      ipv4_address: 169.254.20.6
+      ipv4_address: 10.0.0.6
 
   val3:
-    hostname: validator_3
+    hostname: val3
     image: rippled:latest
     container_name: val3
     volumes:
@@ -64,10 +64,10 @@ services:
     command: ["/opt/ripple/bin/rippled", "--conf", "/etc/opt/ripple/rippled.cfg"]
     networks:
      rippled-net:
-      ipv4_address: 169.254.20.7
+      ipv4_address: 10.0.0.7
 
   val4:
-    hostname: validator_4
+    hostname: val4
     image: rippled:latest
     container_name: val4
     volumes:
@@ -75,10 +75,10 @@ services:
     command: ["/opt/ripple/bin/rippled", "--conf", "/etc/opt/ripple/rippled.cfg"]
     networks:
      rippled-net:
-      ipv4_address: 169.254.20.8
+      ipv4_address: 10.0.0.8
 
   val5:
-    hostname: validator_5
+    hostname: val5
     image: rippled:latest
     container_name: val5
     volumes:
@@ -86,11 +86,11 @@ services:
     command: ["/opt/ripple/bin/rippled", "--conf", "/etc/opt/ripple/rippled.cfg"]
     networks:
      rippled-net:
-      ipv4_address: 169.254.20.9
+      ipv4_address: 10.0.0.9
 
 networks:
   rippled-net:
     driver: bridge
     ipam:
       config:
-      - subnet: 169.254.20.0/24
+      - subnet: 10.0.0.0/24
