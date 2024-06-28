@@ -6,11 +6,14 @@ echo "Waiting for $@"
 DONE=0
 while [ $DONE -eq 0 ]; do
   DONE=1
+  PEERS_EXPECTED=6
   for i in $@; do
-    curl --silent --data '{"method": "server_info"}' http://$i:5005/ | jq -r '.result.info.server_state' | grep -E "^proposing$|^full$" >/dev/null || DONE=0
+    STATE=$(curl --silent --data '{"method": "server_info"}' http://$i:5005/)
+    echo $STATE | jq -r '.result.info.server_state' | grep -E "^proposing$|^full$" >/dev/null || DONE=0
+    echo $STATE | jq -r '.result.info.peers' | grep -E "^${PEERS_EXPECTED}$" >/dev/null || DONE=0
+    echo $STATE | jq -r '.result.info.validated_ledger' | grep -vE "^null$" >/dev/null || DONE=0
+    [ $DONE -eq 0 ] && echo "waiting ..." && sleep 5s && break
   done
-  [ $DONE -eq 1 ] || echo "waiting ..."
-  sleep 5s
 done
 
 # The framework is hard-coded to try to run on a real network so replace the actual devnet test fund account with the real genesis account
