@@ -65,5 +65,10 @@ COPY --from=build /opt/ripple/etc /opt/ripple/etc
 COPY --from=build /usr/lib/libvoidstar.so /usr/lib/libvoidstar.so
 COPY --from=build /root/rippled.txt /opt/ripple/bin/rippled.git-commit.txt
 
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && \
+    apt-get install --yes curl && \
+    apt-get clean
+
 RUN ln -s /opt/ripple/bin/rippled /usr/local/bin/rippled
 RUN mkdir -p /etc/opt && ln -s /opt/ripple/etc/ /etc/opt/ripple
