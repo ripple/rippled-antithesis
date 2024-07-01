@@ -1,5 +1,12 @@
 #!/bin/bash
 
+if [ -x /opt/ripple/bin/rippled ] && [ -r /etc/opt/ripple/rippled.cfg ]; then
+  # Note, this will be forked
+  /opt/ripple/bin/rippled --conf /etc/opt/ripple/rippled.cfg &
+else
+  echo "Cannot start rippled" && exit 1
+fi
+
 cd auto
 
 echo "Waiting for $@"
@@ -7,7 +14,7 @@ DONE=0
 while [ $DONE -eq 0 ]; do
   DONE=1
   PEERS_EXPECTED=6
-  for i in $@; do
+  for i in localhost $@; do
     STATE=$(curl --silent --data '{"method": "server_info"}' http://$i:5005/)
     echo $STATE | jq -r '.result.info.server_state' | grep -E "^proposing$|^full$" >/dev/null || DONE=0
     echo $STATE | jq -r '.result.info.peers' | grep -E "^${PEERS_EXPECTED}$" >/dev/null || DONE=0
@@ -20,5 +27,5 @@ done
 sed -i 's/rh1HPuRVsYYvThxG2Bs1MfjmrVC73S16Fb/rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh/' ./rippled_automation/rippled_end_to_end_scenarios/end_to_end_tests/constants.py
 sed -i 's/snRzwEoNTReyuvz6Fb1CDXcaJUQdp/snoPBrXtMeMyMHUVTgbuqAfg1SUTb/' ./rippled_automation/rippled_end_to_end_scenarios/end_to_end_tests/constants.py
 
-pytest --hostname rippled --port 5005 rippled_automation/rippled_end_to_end_scenarios/end_to_end_tests/payment_test.py::test_xrp_simple_payment
+exec pytest --hostname localhost --port 5005 rippled_automation/rippled_end_to_end_scenarios/end_to_end_tests/payment_test.py::test_xrp_simple_payment
 # pytest --hostname rippled --port 5005 -m smoke
