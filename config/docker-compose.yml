@@ -5,19 +5,9 @@ services:
     container_name: workload
     volumes:
         - ./volumes/workload/:/root
+        - ./volumes/rippled/:/etc/opt/ripple
     command: ["/usr/bin/bash", "-c", "/root/run_tests.sh val0 val1 val2 val3 val4 val5"]
     working_dir: /root
-    networks:
-     rippled-net:
-      ipv4_address: 10.0.0.2
-
-  rippled:
-    hostname: rippled
-    image: rippled:latest
-    container_name: rippled
-    volumes:
-        - ./volumes/rippled/:/etc/opt/ripple
-    command: ["/opt/ripple/bin/rippled", "--conf", "/etc/opt/ripple/rippled.cfg"]
     networks:
      rippled-net:
       ipv4_address: 10.0.0.3
