@@ -25,7 +25,7 @@ RUN conan profile update 'conf.tools.build:compiler_executables={"c": "/usr/bin/
     conan profile update 'conf.tools.build:cxxflags+=["-DBOOST_ASIO_DISABLE_CONCEPTS"]' default
 
 ARG RIPPLED_REPO=https://github.com/Bronek/rippled.git
-ARG RIPPLED_COMMIT=feature/antithesis-instrumentation
+ARG RIPPLED_COMMIT=feature/revert_PR_4944
 ENV SOURCE_DIR=/root/rippled
 RUN git clone ${RIPPLED_REPO} ${SOURCE_DIR} && \
     git -C ${SOURCE_DIR} checkout ${RIPPLED_COMMIT} && \
