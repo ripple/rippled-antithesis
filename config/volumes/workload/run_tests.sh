@@ -2,7 +2,7 @@
 
 if [ -x /opt/ripple/bin/rippled ] && [ -r /etc/opt/ripple/rippled.cfg ]; then
   # Note, this will be forked
-  /opt/ripple/bin/rippled --conf /etc/opt/ripple/rippled.cfg &
+  /opt/ripple/bin/rippled --conf /etc/opt/ripple/rippled.cfg 2> ${ANTITHESIS_OUTPUT_DIR:-.}/rippled.log &
 else
   echo "Cannot start rippled" && exit 1
 fi
