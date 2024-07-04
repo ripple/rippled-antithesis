@@ -397,7 +397,6 @@ def test_xrp_payment_with_invalid_destination_address(fx_rippled):
                                response_result="invalidParams")
 
 
-@pytest.mark.skip("Skipping to unblock MR pipeline till the issue with funding account is resolved")
 def test_xrp_payment_10_million_xrp(fx_rippled):
     rippled_server = fx_rippled["rippled_server"]
 
