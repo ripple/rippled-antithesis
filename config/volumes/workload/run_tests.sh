@@ -2,7 +2,7 @@
 
 if [ -x /opt/ripple/bin/rippled ] && [ -r /etc/opt/ripple/rippled.cfg ]; then
   # Note, this will be forked
-  /opt/ripple/bin/rippled --conf /etc/opt/ripple/rippled.cfg &
+  /opt/ripple/bin/rippled --conf /etc/opt/ripple/rippled.cfg 2> ${ANTITHESIS_OUTPUT_DIR:-.}/rippled.log &
 else
   echo "Cannot start rippled" && exit 1
 fi
@@ -29,5 +29,5 @@ sed -i 's/snRzwEoNTReyuvz6Fb1CDXcaJUQdp/snoPBrXtMeMyMHUVTgbuqAfg1SUTb/' ./ripple
 
 echo "Workload initialization complete"
 
-exec pytest --hostname localhost --port 5005 rippled_automation/rippled_end_to_end_scenarios/end_to_end_tests/payment_test.py::test_xrp_simple_payment
+exec pytest --hostname localhost --port 5005 -m smoke rippled_automation/rippled_end_to_end_scenarios/end_to_end_tests
 # pytest --hostname rippled --port 5005 -m smoke
