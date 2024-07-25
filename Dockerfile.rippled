@@ -1,5 +1,5 @@
 # Note this `build` container should be identical in `Dockerfile.workload`
-FROM debian:bookworm as build
+FROM debian:bookworm AS build
 
 # Antithesis supports only x86_64 architecture
 RUN uname -m | grep -E '^x86_64$'
@@ -25,7 +25,7 @@ RUN conan profile update 'conf.tools.build:compiler_executables={"c": "/usr/bin/
     conan profile update 'conf.tools.build:cxxflags+=["-DBOOST_ASIO_DISABLE_CONCEPTS"]' default
 
 ARG RIPPLED_REPO=https://github.com/Bronek/rippled.git
-ARG RIPPLED_COMMIT=feature/revert_PR_4944
+ARG RIPPLED_COMMIT=feature/antithesis-instrumentation
 ENV SOURCE_DIR=/root/rippled
 RUN git clone ${RIPPLED_REPO} ${SOURCE_DIR} && \
     git -C ${SOURCE_DIR} checkout ${RIPPLED_COMMIT} && \
@@ -67,7 +67,7 @@ COPY --from=build /root/rippled.txt /opt/ripple/bin/rippled.git-commit.txt
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
-    apt-get install --yes curl && \
+    apt-get install --yes curl procps && \
     apt-get clean
 
 RUN ln -s /opt/ripple/bin/rippled /usr/local/bin/rippled
