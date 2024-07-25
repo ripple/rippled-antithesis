@@ -25,7 +25,7 @@ RUN conan profile update 'conf.tools.build:compiler_executables={"c": "/usr/bin/
     conan profile update 'conf.tools.build:cxxflags+=["-DBOOST_ASIO_DISABLE_CONCEPTS"]' default
 
 ARG RIPPLED_REPO=https://github.com/Bronek/rippled.git
-ARG RIPPLED_COMMIT=feature/revert_PR_4944
+ARG RIPPLED_COMMIT=feature/antithesis-instrumentation
 ENV SOURCE_DIR=/root/rippled
 RUN git clone ${RIPPLED_REPO} ${SOURCE_DIR} && \
     git -C ${SOURCE_DIR} checkout ${RIPPLED_COMMIT} && \
@@ -48,6 +48,7 @@ RUN conan install ${SOURCE_DIR} \
 
 RUN cmake -S ${SOURCE_DIR} -B ${BUILD_DIR} \
     -Dvoidstar=ON \
+    -Dxrpld=ON \
     -DCMAKE_BUILD_TYPE=Debug \
     -DSECP256K1_BUILD_BENCHMARK=OFF \
     -DSECP256K1_BUILD_TESTS=OFF \
@@ -58,7 +59,7 @@ RUN cmake --build ${BUILD_DIR}  --parallel $(nproc)
 RUN cmake --install ${BUILD_DIR}  --prefix /opt/ripple
 RUN wget https://antithesis.com/assets/instrumentation/libvoidstar.so  -O /usr/lib/libvoidstar.so
 
-FROM debian:bookworm-slim as rippled
+FROM debian:bookworm-slim
 
 COPY --from=build /opt/ripple/bin /opt/ripple/bin
 COPY --from=build /opt/ripple/etc /opt/ripple/etc
@@ -67,7 +68,7 @@ COPY --from=build /root/rippled.txt /opt/ripple/bin/rippled.git-commit.txt
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
-    apt-get install --yes curl && \
+    apt-get install --yes curl procps && \
     apt-get clean
 
 RUN ln -s /opt/ripple/bin/rippled /usr/local/bin/rippled
