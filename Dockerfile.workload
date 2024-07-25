@@ -48,6 +48,7 @@ RUN conan install ${SOURCE_DIR} \
 
 RUN cmake -S ${SOURCE_DIR} -B ${BUILD_DIR} \
     -Dvoidstar=ON \
+    -Dxrpld=ON \
     -DCMAKE_BUILD_TYPE=Debug \
     -DSECP256K1_BUILD_BENCHMARK=OFF \
     -DSECP256K1_BUILD_TESTS=OFF \
