@@ -29,5 +29,8 @@ sed -i 's/snRzwEoNTReyuvz6Fb1CDXcaJUQdp/snoPBrXtMeMyMHUVTgbuqAfg1SUTb/' ./ripple
 
 echo "Workload initialization complete"
 
-exec pytest --hostname localhost --port 5005 -m smoke rippled_automation/rippled_end_to_end_scenarios/end_to_end_tests
-# pytest --hostname rippled --port 5005 -m smoke
+while true; do
+  echo "Iteration ${it:=1}"
+  python ~/more_txns.py localhost 5005
+  ((it++))
+done
